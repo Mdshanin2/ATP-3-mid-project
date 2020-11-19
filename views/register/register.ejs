@@ -11,7 +11,7 @@
         <hr>
         </div >
         <div class="form">
-        <form method="post" onsubmit="return validate_form()" action="">
+        <form method="post" onsubmit="return validate_form()" action="" enctype="multipart/form-data">
                 <!-- <table> -->
     
                         <div class="textbox">
@@ -156,7 +156,7 @@
                     valid=false;
                 }
             
-                 if (phone=="")
+                 if (phone==""|| phone.length == 11 )
                 {
                     document.getElementById("err_phone").innerHTML="Phone number Required";
                     valid=false;
@@ -172,15 +172,7 @@
                     document.getElementById("err_address").innerHTML="address Required";
                     valid=false;
                 }
-                // else
-                // {
-                // 	document.getElementById("err_name").innerHTML="";
-                // 	document.getElementById("err_price").innerHTML="";
-                // 	document.getElementById("err_qty").innerHTML="";
-                // 	document.getElementById("err_date").innerHTML="";
-                // 	document.getElementById("err_img").innerHTML="";
-                // 	valid=true;
-                // }
+              
             return valid;
     
             }
