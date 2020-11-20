@@ -32,7 +32,7 @@ buyerModel.insert(user, function(status){ //using usermodel to validate with the
 		}
 	});
 }
-else{  
+if(user.member=="freelancer"){  
     freelancerModel.insert(user, function(status){ //using usermodel to validate with the database
 		if(status){
 			//res.cookie('uname', req.body.username);

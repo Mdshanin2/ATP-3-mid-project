@@ -16,7 +16,7 @@
     
                         <div class="textbox">
                         <!-- <label style="color:white" for "name"><b>Name:</label> -->
-                        <input type="text"  placeholder= "Full name"  id="fname" name="fname" ><span id="err_fname" name ="err_fname"></span>
+                        <input type="text"  placeholder= "Full name"  id="fname" name="fname" ><span style="color:red" id="err_fname" name ="err_fname"></span>
                             <!-- <input type="text"  placeholder="Last name" value="<?php echo $lname;?>" name="lname" > -->
                             <!-- <br><span>First Name</span>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span>Last Name</span> -->
                             <!-- <span style="color:red"><?php echo $err_fname;?></span> -->
@@ -28,7 +28,7 @@
                      </div>
                     
                      <div class="textbox">
-                        <input type="text"  placeholder="username" name="uname" id="uname" "><span id="err_uname" name ="err_uname"></span>
+                        <input type="text"  placeholder="username" name="uname" id="uname" "><span style="color:red" id="err_uname" name ="err_uname"></span>
                         <!-- <span style="color:red"><?php echo $err_uname;?></span> -->
                         
                         
@@ -37,7 +37,7 @@
     
                     <div class="textbox">
                         
-                        <input type="password"  placeholder="password" name="pass" id="pass"><span id="err_pass" name ="err_pass"></span>
+                        <input type="password"  placeholder="password" name="pass" id="pass"><span style="color:red" id="err_pass" name ="err_pass"></span>
                         <input type="password"  placeholder="re-type password" name="pass2" id="pass2" >
                         
                         <!-- <span style="color:red"><?php echo $err_pass;?></span>
@@ -51,7 +51,7 @@
     
                     <div class="textbox">
                         <!-- <label for "email" style="color:white"><b>E-mail: </label> -->
-                        <input type="text"  placeholder="eg:myname@example.com" name="email" id="email"><span id="err_email" name ="err_email"></span>
+                        <input type="text"  placeholder="eg:myname@example.com" name="email" id="email"><span style="color:red" id="err_email" name ="err_email"></span>
                         <!-- <span style="color:red"><?php echo $err_email;?></span> -->
                         <!-- <br><span>Email</span> -->
                         
@@ -62,7 +62,7 @@
                         <!-- <td style="color:white"><b>Phone:</td> -->
                          
                         <!-- <input type="text" name="area" value="<?php echo $area;?>"> -->
-                        <input type="text" class= "textbox t4" placeholder="phonenumber" name="phone" id="phone" ><span id="err_phone" name ="err_phone"></span>
+                        <input type="text" class= "textbox t4" placeholder="phonenumber" name="phone" id="phone" ><span style="color:red" id="err_phone" name ="err_phone"></span>
                         <!-- <br><span>area code</span>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span>phone number</span> -->
                             
                         
@@ -75,7 +75,7 @@
                     <div class="textbox">
                         
                         <!-- <td style="color:white"><b>Address:</b></td> -->
-                        <td><input type="text"  placeholder="Street address"  name="address1" id="address1"><span id="err_address" name ="err_address"></span>
+                        <td><input type="text"  placeholder="Street address"  name="address1" id="address1"><span style="color:red" id="err_address" name ="err_address"></span>
                         <!-- <input type="text"  placeholder="Street address part 2" value="<?php echo $address2;?>" name="address2" > -->
                             
                             <!-- <span style="color:red"><?php echo $err_add1;?></span>     -->
@@ -106,7 +106,7 @@
                         <label for "member" style="color:white"><b>Member type: </b></label>
                         <input type="radio" name="member" value="freelancer"> Freelancer 
                         <input type="radio" name="member" value="buyer"> Buyer
-                    
+                        <span style="color:red" id="err_member" name ="err_member"></span>
                     </div>                   
                 
                     <div class="cnt">
@@ -128,7 +128,7 @@
                 var phone= document.getElementById("phone").value;
                 var email= document.getElementById("email").value;
                 var address1= document.getElementById("address1").value;
-                
+                var member= document.getElementById("member").value;
                 
                 var valid=true;
                 if (document.getElementById("fname").value=="")
@@ -172,7 +172,11 @@
                     document.getElementById("err_address").innerHTML="address Required";
                     valid=false;
                 }
-              
+                if (member=="")
+			    {
+				document.getElementById("err_member").innerHTML="Member Required";
+				valid=false;
+			    }
             return valid;
     
             }

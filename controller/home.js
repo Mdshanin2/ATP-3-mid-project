@@ -4,11 +4,14 @@ const router 	= express.Router();
 
 router.get('/', (req, res)=>{
 	
-	if(req.cookies['uname'] != null){
-		res.render('home/index');
-	}else{
-		res.redirect('/login');
-	}
+	res.render('home/index');// remove it after you have done your work
+
+
+	// if(req.cookies['uname'] != null){
+	// 	res.render('home/index');
+	// }else{
+	// 	res.redirect('/login');
+	// }
 })
 
 router.get('/userlist', (req, res)=>{
