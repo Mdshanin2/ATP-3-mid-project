@@ -27,7 +27,7 @@ if (user.member=="buyer" )
 buyerModel.insert(user, function(status){ //using usermodel to validate with the database
 		if(status){
 			//res.cookie('uname', req.body.username);
-            res.redirect('/home/buyerlist');	 // check if i can send an alert or not for insertion done
+            res.redirect('/home/buyerlist');//need to change	 // check if i can send an alert or not for insertion done
 		}else{
 			res.redirect('user/create');
 		}
@@ -37,7 +37,7 @@ if(user.member=="freelancer"){
     freelancerModel.insert(user, function(status){ //using usermodel to validate with the database
 		if(status){
 			//res.cookie('uname', req.body.username);
-            res.redirect('/home/freelancerlist');	 // check if i can send an alert or not
+            res.redirect('/home/freelancerlist');//need to change	 // check if i can send an alert or not
 		}else{
 			res.redirect('user/create');
 		}
@@ -46,7 +46,7 @@ if(user.member=="freelancer"){
 if(user.member=="admin"){ 
 	userModel.insert(user, function(status){
 		if(status){
-			res.redirect('/home/userlist');
+			res.redirect('/home/userlist');// need to change
 		}else{
 			res.redirect('user/create');
 		}
@@ -60,15 +60,33 @@ router.get('/edit/:id', (req, res)=>{
 
 	//var data = req.params.id;
 	//res.send(data);
-	var user ={
-		id: req.params.id,
-		username: 'alamin',
-		password: '123',
-		email: 'alamin@gmail.com',
-		dept: 'CS'
-	};
+	a_id = req.params.id;
+	console.log(a_id);
+	userModel.getById(req.params.id, function(results){
+	console.log("obj",results);
 
-	res.render('user/edit', user);
+	//console.log("fname",results[fname]);
+	
+		// var user = {
+		// 	id : a_id,
+		// 	fname: results[0].fname,
+		// 	username: results[0].uname,  //fname, uname, pass, pass2, email, phone, address1, member(freelancer/buyer) 
+		// 	password: results[0].pass,
+		// 	email:    results[0].email, 
+		// 	phone:    results[0].phone,
+		// 	address:  results[0].address1
+		// 	//member: result.member
+		// 	 // need to check for radio button
+		// 	};
+		// 	console.log(user);
+		
+			res.render('user/edit', {userlist:results});
+			 //console.log(userlist);
+	});
+	
+
+
+	// res.render('user/edit', user);
 })
 
 
@@ -78,24 +96,55 @@ router.post('/edit/:id', (req, res)=>{
 	//req.body.email
 	//req.body.password
 	//req.body.dept
+	var user = {
+        fname: req.body.fname,
+        username: req.body.uname,  //fname, uname, pass, pass2, email, phone, address1, member(freelancer/buyer) 
+        password: req.body.pass,
+        email:    req.body.email, 
+        phone:    req.body.phone,
+        address:  req.body.address1, 
+        member: req.body.member
+         // need to check for radio button
+	};
+	userModel.update(user, function(status){
+		if(status){
+			res.redirect('/home/userlist');// need to change the path
+		}else{
+			res.redirect('user/create');
+		}
+	});
 
-	res.redirect('/home/userlist');
 })
 
 router.get('/delete/:id', (req, res)=>{
-	var user ={
-		id: req.params.id,
-		username: 'alamin',
-		password: '123',
-		email: 'alamin@gmail.com',
-		dept: 'CS'
-	};
-
-	res.render('user/delete', user);
+	// a_id = req.params.id;
+	// console.log(a_id);
+	userModel.getById(req.params.id, function(results){
+	console.log("obj",results);		
+			res.render('user/delete', {userlist:results});
+			 //console.log(userlist);
+	});
+	
 })
 
 router.post('/delete/:id', (req, res)=>{
-	
+	var user = {
+        fname: req.body.fname,
+        username: req.body.uname,  //fname, uname, pass, pass2, email, phone, address1, member(freelancer/buyer) 
+        password: req.body.pass,
+        email:    req.body.email, 
+        phone:    req.body.phone,
+        address:  req.body.address1, 
+        member: req.body.member
+         // need to check for radio button
+	};
+	userModel.delete(user, function(status){
+		if(status){
+			res.redirect('/home/userlist');// need to change the path
+		}else{
+			res.redirect('user/create');
+		}
+	});
 	//delete from DB
 	res.redirect('/home/userlist');
 })

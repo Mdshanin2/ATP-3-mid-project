@@ -12,8 +12,11 @@ module.exports ={
 			}
 		});
 	},
-	getById: function(){
-
+	getById: function(id,callback){
+		var sql= "select * from admins where id=? ";
+		db.getResults(sql, [id], function(results){
+			callback(results);
+		});
 	},
 	
 	getAll: function(callback){
