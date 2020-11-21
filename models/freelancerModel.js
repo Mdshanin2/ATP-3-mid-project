@@ -12,8 +12,11 @@ module.exports ={
 			}
 		});
 	},
-	getById: function(){
-
+	getById: function(id,callback){
+		var sql= "select * from freelancer where id=? ";
+		db.getResults(sql, [id], function(results){
+			callback(results);
+		});
 	},
 	
 	getAll: function(callback){
@@ -36,9 +39,10 @@ module.exports ={
 			callback(status);
 		});
 	},
-	delete: function(user,callback){ var sql = "DELETE FROM freelancer WHERE username= ?  ";
+	delete: function(user,callback){
+	 var sql = "DELETE FROM freelancer WHERE username= ? and password =?  ";
 
-    db.execute(sql, [ user.username ], function(status)
+    db.execute(sql, [ user.username,user.password ], function(status)
     {
         callback(status);
     });

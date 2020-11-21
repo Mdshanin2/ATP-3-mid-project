@@ -27,7 +27,7 @@ if (user.member=="buyer" )
 buyerModel.insert(user, function(status){ //using usermodel to validate with the database
 		if(status){
 			//res.cookie('uname', req.body.username);
-            res.redirect('/home/buyerlist');//need to change	 // check if i can send an alert or not for insertion done
+            res.redirect('/admin_buyerlist');//need to change	 // check if i can send an alert or not for insertion done
 		}else{
 			res.redirect('user/create');
 		}
@@ -37,7 +37,7 @@ if(user.member=="freelancer"){
     freelancerModel.insert(user, function(status){ //using usermodel to validate with the database
 		if(status){
 			//res.cookie('uname', req.body.username);
-            res.redirect('/home/freelancerlist');//need to change	 // check if i can send an alert or not
+            res.redirect('/admin_freelancerlist');//need to change	 // check if i can send an alert or not
 		}else{
 			res.redirect('user/create');
 		}
@@ -91,11 +91,6 @@ router.get('/edit/:id', (req, res)=>{
 
 
 router.post('/edit/:id', (req, res)=>{
-
-	//req.body.username
-	//req.body.email
-	//req.body.password
-	//req.body.dept
 	var user = {
         fname: req.body.fname,
         username: req.body.uname,  //fname, uname, pass, pass2, email, phone, address1, member(freelancer/buyer) 
@@ -146,7 +141,7 @@ router.post('/delete/:id', (req, res)=>{
 		}
 	});
 	//delete from DB
-	res.redirect('/home/userlist');
+	// res.redirect('/home/userlist');
 })
 
 

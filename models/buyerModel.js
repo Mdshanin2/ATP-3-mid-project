@@ -12,14 +12,19 @@ module.exports ={
 			}
 		});
 	},
-	getById: function(){
-
+	getById: function(id, callback){
+		var sql= "select * from buyer where id=? ";
+		db.getResults(sql, [id], function(results){
+			callback(results);
+		});
 	},
 	
 	getAll: function(callback){
+		
 		var sql = "select * from buyer";
 		db.getResults(sql, null, function(results){
 			callback(results);
+			console.log(results);
 		});
 	},
 	insert: function(user, callback){
@@ -37,9 +42,9 @@ module.exports ={
 		});
 	},
 	delete: function(user,callback){
-        var sql = "DELETE FROM buyers WHERE username= ?  "; //and password= ?
+        var sql = "DELETE FROM buyers WHERE username= ? and password= ?  "; //and password= ?
 
-		db.execute(sql, [ user.username], function(status){  //, user.password (if you need it )
+		db.execute(sql, [ user.username, user.password ], function(status){  //, user.password (if you need it )
 			callback(status);
         
 	    });

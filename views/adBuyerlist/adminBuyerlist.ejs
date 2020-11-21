@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<%- include ('../home/admin_header')%>
+	<!-- <h3>Admin list</h3> -->
+<!-- 
+	<a href="/home">Back</a> |
+	<a href="/logout">logout</a>
+	<br> -->
+	<!-- <span class="input-group-addon">Search</span> -->
+	<div class="form-group">
+		<div class="input-group">
+			
+			<input type="text" name="search_text"  id="search_input" onkeyup="search()" placeholder="Search product Name" class="search" >
+		</div>
+	
+	</div>
+	<!-- 
+	class="form-control" -->
+	
+	<div class="center" id="search_result">
+		<h3 class="text">Buyer list</h3>
+		<table class="table table-striped">
+			<thead>
+				<th>id</th> 
+				<th> Name</th>
+				<th>User_name</th>
+				<th> email_id</th>
+				<th> phone_no</th>
+				<th>address</th>
+				<th></th>
+				
+			</thead>
+			<tbody>
+				<% for(var i=0; i< userlist.length; i++ ){ %>
+					<tr>
+						<td><%= userlist[i].id %></td>
+						<td><%= userlist[i].fname %></td>
+						<td><%= userlist[i].username%></td>
+						<td><%= userlist[i].email %></td>
+						<td><%= userlist[i].phone %></td>
+						<td><%= userlist[i].address %></td>
+						<!-- <td><a href="/admin_buyerlist/edit/<%=userlist[i].id%>"class="btn btn-success">Edit</a></td>   -->
+						<td><a href="/adBuyerlist/delete/<%=userlist[i].id%>" class="btn btn-danger">Delete</a></td>  
+						
+					</tr>
+					<% } %>
+				<!-- <?php
+					foreach($products as $product)
+					{
+						echo "<tr>";
+							echo "<td>".$product["p_id"]."</td>";
+							echo "<td>".$product["name"]."</td>";
+							echo "<td>".$product["category_id"]."</td>";
+							echo "<td>".$product["unit_price"]."</td>";
+							echo "<td>".$product["unit_qty"]."</td>";
+							echo "<td>".$product["expire_date"]."</td>";
+							echo '<td><a href="editproduct.php?id='.$product["p_id"].'" class="btn btn-success">Edit</a></td>';
+							echo '<td><a href="../controllers/ProductController.php?delete_id='.$product["p_id"].'"class="btn btn-danger">Delete</a></td>';
+						echo "</tr>";///////for delete it uses the delete_id as p_id
+					}
+				?> -->
+				
+			</tbody>
+		</table>
+	</div>
+	
+	
+	<script>
+				function call_ajax()
+				{
+				 var http= new XMLHttpRequest();
+				  http.onreadystatechange=function()
+				  {
+					if (this.readyState == 4 && this.status == 200)
+					{
+						alert(http.responseText);
+					} 
+	
+					else if (http.status==404)
+					{alert("file not found");
+					}
+	
+	
+	
+				  }
+					// http.open("GET","another.php",true);
+					// http.send();
+				}
+	// ----------------------------how search works-------------- 
+				   function search()
+				   { debugger;
+					 var http =new XMLHttpRequest();
+					 var search_word= document.getElementById("search_input").value;
+					 http.onreadystatechange= function()
+					 {
+						 if(http.readyState== 4 && http.status== 200)
+						 {
+							 document.getElementById("search_result").innerHTML= http.responseText;
+						 }
+					 }
+					http.open("GET","search_products.php?sk="+search_word,true);// need work here
+					http.send();
+	
+				   } 
+				
+			</script>
+</body>
+</html>
+
+	<!-- <table border="1">
+		<tr>
+			<td>ID</td>
+			<td>USERNAME</td>
+			<td>PASSWORD</td>
+			<td>TYPE</td>
+			<td>Action</td>
+		</tr>
+
+		<% for(var i=0; i< userlist.length; i++ ){ %>
+		<tr>
+			<td><%= userlist[i].id %></td>
+			<td><%= userlist[i].username %></td>
+			<td><%= userlist[i].password %></td>
+			<td><%= userlist[i].type %></td>
+			<td>
+				<a href="/user/edit/<%=userlist[i].id%>">Edit</a> | 
+				<a href="/user/delete/<%=userlist[i].id%>">Delete</a>  
+			</td>
+		</tr>
+		<% } %>
+	</table> -->
