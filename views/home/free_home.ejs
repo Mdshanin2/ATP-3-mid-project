@@ -1,0 +1,119 @@
+<%- include ('free_header')%>
+
+	<h1>This is freelancer home page </h1>
+	<h3>need to add job taken by the freelancer here</h3>
+	
+		<!-- <a href="/user/create">Create New User</a> |
+		<a href="/home/userlist">User list</a> |
+		<a href="/logout">logout</a> -->
+	<form>
+		<input type="text" name="searchkey">
+		<input type="button" name="search" value="Search">
+	</form>
+
+	<script type="text/javascript">
+		
+		$(document).ready(function(){
+			
+			$('input[type=button]').click(function(){
+
+				var key = $('input[type=text]').val();
+				$.ajax({
+					url: '/user/search/'+key,
+					type: 'GET',
+					data: abc,
+					success: function(response){
+						alert(response);
+					},
+					error: function(error){
+
+					}
+				});
+
+			});			
+		});
+
+	</script>
+
+<!-- <?php include 'welcome_header.php';
+	require_once ('../controllers/ProductController.php');
+	require_once ('../controllers/CategoryController.php');
+	require_once ('../controllers/total_orderController.php');
+	$t_order=count(getAlltotal_orders());
+	$t_products=count(getAllProducts());
+	$t_categories=count(getAllCategories());
+	$orders= getAlltotal_orders();
+?> -->
+<!--dashboard starts -->
+<div>
+	<table  align="center">
+		<tr>
+			<td>
+				<div class="card">
+				<span class="text-white"> Total Products <br>
+					<?php echo $t_products;?>
+				</span>
+				</div>
+			</td>
+			<td>
+				<div class="card">
+				<span class="text-white"> Total Categories <br>
+					<?php echo $t_categories;?>
+				</span>
+				</div>
+			</td>
+			<td>
+				<div class="card">
+				<span class="text-white"> Total Sales <br>
+				<?php echo $t_order;?>
+				</span>
+				</div>
+			</td>
+		</tr>
+	</table>
+</div>
+
+<div class="center">
+   <h3 class="text">Orders delivered</h3>
+   <table class="table table-striped"style=" width:100%;text-align:center;">
+       <thead>
+            <th>Sl#</th> 
+            <th>User name</th>
+			<th>Address</th>
+            <th>Customer_order_id</th>
+           
+            <th></th>
+			
+		</thead>
+		<!-- <tbody>
+            <?php
+            //////////////////////////////////////////work needs to be done here
+			    
+				foreach( $orders as $order)
+				{
+					echo "<tr>";
+                        
+                        echo "<td>".$order["id"]."</td>";
+                        echo "<td>".$order["uname"]."</td>";
+                        echo "<td>".$order["address"]."</td>";
+                        echo "<td>".$order["customer_order_id"]."</td>";
+						// echo "<td>".$shop["category_id"]."</td>";
+						
+					//////add
+					 
+					/////////check
+                        //  echo '<td><a href="delivery.php?id='.$order["p_id"].'" class="btn btn-success">Deliver</a></td>';
+                       /////// 
+                        //  echo '<td><a href="../controllers/delivery_Controller.php?delete_id='.$order["id"].'"
+						// class="btn btn-danger">Delete order once delivered</a></td>';///////////////////////
+					
+						echo "</tr>";
+				}
+			?>
+			
+           
+       </tbody> -->
+  
+	</table>
+</body>
+</html>

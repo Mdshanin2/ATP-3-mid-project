@@ -6,28 +6,32 @@ const router 	= express.Router();
 
 router.get('/', (req, res)=>{
 	
-	res.render('home/index');// remove it after you have done your work
+	freelancerModel.getByname(req.cookies['uname'],function(results){
+		//need to add jobs the uname has taken
+		
+		if(req.cookies['uname'] != null){
+				res.render('home/free_home');
+			}else{
+				res.redirect('/login');
+			}
+		//res.render('home/free_home');
+	
 
-
-	// if(req.cookies['uname'] != null){
-	// 	res.render('home/index');
-	// }else{
-	// 	res.redirect('/login');
-	// }
+	});
 });
 
 router.get('/info', (req, res)=>{
 	
 	//res.render('home/index');// remove it after you have done your work
-	userModel.getByname(req.cookies['uname'],function(results){
-		res.render('home/admin_info', {userlist: results});
+	freelancerModel.getByname(req.cookies['uname'],function(results){
+		res.render('home/freelancer_info', {userlist: results});
 	});
-	
+
 });
+
 router.post('/info', (req, res)=>{
-	
 	var user = {
-        fname: 	  req.body.fname,
+        fname: req.body.fname,
         username: req.body.uname,  //fname, uname, pass, pass2, email, phone, address1, member(freelancer/buyer) 
         password: req.body.pass,
         email:    req.body.email, 
@@ -37,30 +41,30 @@ router.post('/info', (req, res)=>{
          // need to check for radio button
 	};
 	console.log(user);
-	//console.log(req.body);
 	//res.render('home/index');// remove it after you have done your work
 	
-	 userModel.update(user,function(status){
+	freelancerModel.update(user,function(status){
 		if(status){
-			userModel.getByname(user.username,function(results){
-			//alert("user info updated");
-			res.render('home/admin_info', {userlist: results});
-			});// need to change the path
+			freelancerModel.getByname(user.username,function(results){
+				res.render('home/freelancer_info', {userlist: results});
+			});
+			//sres.render('home/freelancer_info');// need to change the path
 		}else{
-			//alert("something wrong cannot update");
-			res.redirect('/home/info');
+			
+			res.redirect('/freelancer/info');
 		}
-    });
 		
-	
-});
-
-
-router.get('/userlist', (req, res)=>{
-
-	userModel.getAll(function(results){
-		res.render('home/userlist', {userlist: results});
 	});
 
 });
+router.get('/free_admin_chat', (req, res)=>{
+
+	userModel.getAll(function(results){
+		res.render('home/free_admin_chat', {userlist: results});
+	});
+
+});
+
+
+
 module.exports = router;

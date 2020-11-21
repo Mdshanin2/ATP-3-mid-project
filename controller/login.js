@@ -14,7 +14,7 @@ router.post('/', (req, res)=>{
 		username: req.body.username,
 		password: req.body.password
 	};
-
+console.log(user);
 	userModel.validate(user, function(status){ //using usermodel to validate with the database
 		if(status){
 			res.cookie('uname', req.body.username);
@@ -29,7 +29,7 @@ router.post('/', (req, res)=>{
 					freelancerModel.validate(user, function(status){ //need to make and work on freelancer model
 						if(status){
 							res.cookie('uname', req.body.username);
-							res.redirect('/');	// send to freelancer home.ejs
+							res.redirect('/freelancer');	// send to freelancer home.ejs
 						}else{
 							res.redirect('/login');
 						}

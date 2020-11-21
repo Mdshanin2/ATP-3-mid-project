@@ -18,7 +18,12 @@ module.exports ={
 			callback(results);
 		});
 	},
-	
+	getByname: function(name,callback){
+		var sql= "select * from freelancer where username=? ";
+		db.getResults(sql, [name], function(results){
+			callback(results);
+		});
+	},
 	getAll: function(callback){
 		var sql = "select * from freelancer";
 		db.getResults(sql, null, function(results){

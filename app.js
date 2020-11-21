@@ -10,6 +10,8 @@ const user			= require('./controller/user');
 const reg			= require('./controller/register');// added the controller to the register 
 const adbuyer		= require('./controller/adBuyerlist');
 const admfree        = require('./controller/adFreelancerlistCon');
+//freelancer
+const fhome			= require('./controller/free_homeCon');
 const app 			= express();
 
 //config
@@ -26,11 +28,11 @@ app.use('/home', home);
 app.use('/logout', logout);
 app.use('/user', user);
 app.use('/register', reg); // added the path to the register
-//app.use('/adBuyerlist', adbuyer);
-
-
 app.use('/adBuyerlist', adbuyer);
 app.use('/adFreelancerlist', admfree);
+
+//freelancer
+app.use('/freelancer',fhome);
 
 
 // app.use('/adBuyerlist', adbuyer);
