@@ -19,6 +19,13 @@ module.exports ={
 		});
 	},
 	
+	getByname: function(name,callback){
+		var sql= "select * from admins where username=? ";
+		db.getResults(sql, [name], function(results){
+			callback(results);
+		});
+	},
+	
 	getAll: function(callback){
 		var sql = "select * from admins";
 		db.getResults(sql, null, function(results){
