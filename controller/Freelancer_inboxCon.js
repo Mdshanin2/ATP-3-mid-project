@@ -2,7 +2,7 @@ const express 	= require('express');
 //const userModel = require.main.require('./models/userModel');
 //const buyerModel	= require.main.require('./models/buyerModel');
 //const freelancerModel	= require.main.require('./models/freelancerModel');
-const inboxModel = require.main.require('./models/inboxModel');
+const inboxModel = require.main.require('./models/freelancer_inboxModel');
 const router 	= express.Router();
 
 router.get('/', (req, res)=>{
@@ -24,39 +24,7 @@ var you = "you";
 	// }
 });
 
-router.get('/delete/:id', (req, res)=>{
-	// a_id = req.params.id;
-	// console.log(a_id);
-	inboxModel.getById(req.params.id, function(results){
-    console.log("obj",results);		
-    var user = {
-			id : req.params.id,
-			message: results[0].message,
-			username: results[0].username,  //fname, uname, pass, pass2, email, phone, address1, member(freelancer/buyer) 
-			id_u: results[0].id,
-			
-			//member: result.member
-			 // need to check for radio button
-            };
-            console.log("user",user);	
-        inboxModel.delete(user, function(status){
-		if(status){
-			console.log("username",user.username);
-           		inboxModel.getNotByname(req.cookies['uname'],function(result){
-					console.log("chathkjhkjh",result);
-					res.render('home/inbox', {userlist: result});
-				});
-        
-			//res.render('adFreelancerlist/adminFreelancerlist');// need to change the path
-		}else{
-			res.redirect('/home/inbox');
-		}
-	});
-			//res.render('/adBuyerlist/delete', {userlist:results});
-			 //console.log(userlist);
-	});
-	
-})
+
 
 router.get('/reply/:name', (req, res)=>{
 	// a_id = req.params.id;
@@ -66,9 +34,9 @@ router.get('/reply/:name', (req, res)=>{
 	console.log("Admin_username",req.cookies['uname']);	
 
 
-	inboxModel.getbytwoUsername(req.params.name,req.cookies['uname'], function(results){
+	inboxModel.getbytwoUsername(req.cookies['uname'],req.params.name, function(results){
 	console.log("obj",results);	
-	res.render('home/inboxinside', {userlist: results});	
+	res.render('home/freelancer_inboxInside', {userlist: results});	
     
 	});
 	
@@ -85,8 +53,8 @@ router.post('/reply/:name', (req, res)=>{
 	var user = {
 		        message: 	  	req.body.mes,
 		        sysdate: 		d,
-			    you:		 	req.params.name,
-			    admin: 			req.cookies['uname'],
+			    you:		 	req.cookies['uname'],
+			    admin: 			req.params.name,
 			    reply: 			req.cookies['uname']
 		      
 			};
@@ -94,13 +62,48 @@ router.post('/reply/:name', (req, res)=>{
 
 	inboxModel.insert(user, function(results){
 
-		inboxModel.getbytwoUsername(req.params.name,req.cookies['uname'], function(results){
+		inboxModel.getbytwoUsername(req.cookies['uname'],req.params.name, function(results){
 		console.log("objtttttt",results);	
-		res.render('home/inboxinside', {userlist: results});	
+		res.render('home/freelancer_inboxInside', {userlist: results});	
 		});
 	});
 	
 })
+
+
+// router.get('/delete/:id', (req, res)=>{
+// 	// a_id = req.params.id;
+// 	// console.log(a_id);
+// 	inboxModel.getById(req.params.id, function(results){
+//     console.log("obj",results);		
+//     var user = {
+// 			id : req.params.id,
+// 			message: results[0].message,
+// 			username: results[0].username,  //fname, uname, pass, pass2, email, phone, address1, member(freelancer/buyer) 
+// 			id_u: results[0].id,
+			
+// 			//member: result.member
+// 			 // need to check for radio button
+//             };
+//             console.log("user",user);	
+//         inboxModel.delete(user, function(status){
+// 		if(status){
+// 			console.log("username",user.username);
+//            		inboxModel.getNotByname(req.cookies['uname'],function(result){
+// 					console.log("chathkjhkjh",result);
+// 					res.render('home/inbox', {userlist: result});
+// 				});
+        
+// 			//res.render('adFreelancerlist/adminFreelancerlist');// need to change the path
+// 		}else{
+// 			res.redirect('/home/inbox');
+// 		}
+// 	});
+// 			//res.render('/adBuyerlist/delete', {userlist:results});
+// 			 //console.log(userlist);
+// 	});
+	
+// })
 // router.get('/info', (req, res)=>{
 	
 // 	//res.render('home/index');// remove it after you have done your work

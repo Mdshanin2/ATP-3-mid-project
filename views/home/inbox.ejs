@@ -1,4 +1,54 @@
 <%- include ('../home/admin_header')%>
-    
+
+
+<div class="center" id="search_result">
+    <h3 class="text">chat list</h3>
+    <table class="table table-striped">
+        <thead>
+            <!-- <th>id</th>  -->
+            <!-- <th> Message</th> -->
+            <th>User_name</th>
+            <!-- <th> User id</th> -->
+            <th> Action</th>
+            <th>Action</th>
+            <th></th>
+            
+        </thead>
+        <tbody>
+            <% for(var i=0; i< userlist.length; i++ ){ %>
+                <tr>
+                    <!-- <td><%= userlist[i].id_chat %></td> -->
+                    <!-- <td><%= userlist[i].message %></td> -->
+                    <td><%= userlist[i].username%></td>
+                    <!-- <td><%= userlist[i].id %></td> -->
+                   
+                    <td><a href="/inbox/reply/<%=userlist[i].username%>"class="btn btn-success">Reply</a></td>  
+                    <td><a href="/inbox/delete/<%=userlist[i].id_chat%>" class="btn btn-danger">Delete</a></td>  
+                    
+                    
+                </tr>
+                <% } %>
+            <!-- <?php
+                foreach($products as $product)
+                {
+                    echo "<tr>";
+                        echo "<td>".$product["p_id"]."</td>";
+                        echo "<td>".$product["name"]."</td>";
+                        echo "<td>".$product["category_id"]."</td>";
+                        echo "<td>".$product["unit_price"]."</td>";
+                        echo "<td>".$product["unit_qty"]."</td>";
+                        echo "<td>".$product["expire_date"]."</td>";
+                        echo '<td><a href="editproduct.php?id='.$product["p_id"].'" class="btn btn-success">Edit</a></td>';
+                        echo '<td><a href="../controllers/ProductController.php?delete_id='.$product["p_id"].'"class="btn btn-danger">Delete</a></td>';
+                    echo "</tr>";///////for delete it uses the delete_id as p_id
+                }
+            ?> -->
+            
+        </tbody>
+    </table>
+</div>
+
+
+
 </body>
 </html>

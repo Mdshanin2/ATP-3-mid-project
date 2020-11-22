@@ -199,14 +199,14 @@ width: 350px;
 
 .btn2
 { border:0;
-  color:rgb(0, 0, 0);
+  color:rgb(255, 255, 255);
 width:auto;
 
 }
 .btn2:hover
 {
-  background: rgb(59, 56, 56);
-  color: #2e3131;
+  background: rgb(255, 255, 255);
+  color: #000000;
   border-radius: 24px;
 }
 

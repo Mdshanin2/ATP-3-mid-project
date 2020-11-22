@@ -1,0 +1,58 @@
+<%- include ('../home/admin_header')%>
+
+
+<div class="center" id="search_result">
+    <h3 class="text">chat Box</h3>
+    <table class="table table-striped">
+        <thead>
+            <!-- <th>id</th>  -->
+            <th> Message</th>
+            <!-- <th>Buyer Or Freelancer username</th> -->
+            <th>Date</th>
+            <th>Reply</th>
+            <!-- <th> User id</th> -->
+            <!-- <th> you</th> -->
+            <!-- <th>Action</th> -->
+            <!-- <th>Action</th> -->
+            <th></th>
+            
+        </thead>
+        <tbody>
+            <% for(var i=0; i< userlist.length; i++ ){ %>
+                <tr>
+                    <!-- <td><%= userlist[i].id_chat %></td> -->
+                    <td><%= userlist[i].message %></td>
+                    <!-- <td><%= userlist[i].username%></td> -->
+                    <td><%= userlist[i].date%></td>
+                    <td><%= userlist[i].reply%></td>
+                    <!-- <td><%= userlist[i].id %></td> -->        
+                </tr>
+                
+                <% } %>
+
+        </tbody>
+    </table>
+
+
+    <div class="center">
+        <form method="post"  action="" enctype="" class="form-horizontal form-material">
+    <div class="form-group">
+        <!-- <h4 class="text">Username:</h4>  -->
+        
+        <input type="text"  placeholder="Message" name="mes" id="mes" class="form-control" size="50">
+        <span style="color:red"id="err_uname" name ="err_uname"></span>
+    </div>
+      
+
+    <div class="form-group text-center">
+        
+        <input type="submit"  class="btn btn-success" name="Reply" value="Reply" class="form-control">
+    </div>
+</form>
+</div>
+</div>
+
+
+
+</body>
+</html>
