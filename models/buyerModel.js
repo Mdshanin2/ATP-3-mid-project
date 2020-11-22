@@ -24,6 +24,13 @@ module.exports ={
 			callback(results);
 		});
 	},
+	getcount: function(callback){
+		var sql = "SELECT COUNT(*) as t_c FROM buyer ";
+		db.getResults(sql, null, function(results){
+			callback(results);
+		});
+	},
+
 	getAll: function(callback){
 		
 		var sql = "select * from buyer";

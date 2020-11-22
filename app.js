@@ -10,6 +10,8 @@ const user			= require('./controller/user');
 const reg			= require('./controller/register');// added the controller to the register 
 const adbuyer		= require('./controller/adBuyerlist');
 const admfree        = require('./controller/adFreelancerlistCon');
+const inbox        = require('./controller/inboxCon');
+//const job			= require('./controller/joblistCon');
 //freelancer
 const fhome			= require('./controller/free_homeCon');
 const app 			= express();
@@ -30,6 +32,8 @@ app.use('/user', user);
 app.use('/register', reg); // added the path to the register
 app.use('/adBuyerlist', adbuyer);
 app.use('/adFreelancerlist', admfree);
+//app.use('/', job);
+app.use('/inbox',inbox);
 
 //freelancer
 app.use('/freelancer',fhome);

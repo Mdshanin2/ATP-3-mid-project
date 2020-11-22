@@ -25,6 +25,8 @@ module.exports ={
 			callback(results);
 		});
 	},
+
+
 	
 	getAll: function(callback){
 		var sql = "select * from admins";
