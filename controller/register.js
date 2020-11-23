@@ -8,8 +8,13 @@ router.get('/', (req, res)=>{
 })
 
 router.post('/', (req, res)=>{ // needs work
-
-	var user = {
+// req.check('email','invalid email address').isEmail();
+// req.check('pass','password is invalid').isLength({min:4}).equals(req.body.pass2);
+// var errors = req.validationErrors();
+// if (errors){
+// 	req.exsession.errors = errors;
+// }	
+var user = {
         fname: req.body.fname,
         username: req.body.uname,  //fname, uname, pass, pass2, email, phone, address1, member(freelancer/buyer) 
         password: req.body.pass,

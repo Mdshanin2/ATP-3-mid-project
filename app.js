@@ -2,6 +2,8 @@
 const express 		= require('express');
 const bodyParser 	= require('body-parser');
 const exSession 	= require('express-session');
+const expressValidator	= require('express-validator');
+
 const cookieParser 	= require('cookie-parser');
 const login			= require('./controller/login');
 const home			= require('./controller/home');
@@ -16,15 +18,21 @@ const freelancer_inbox        = require('./controller/Freelancer_inboxCon');
 //freelancer
 const fhome			= require('./controller/free_homeCon');
 const app 			= express();
+// pdf work
+var pdf        = require('html-pdf');
+var fs         = require('fs');
+var options    = {format:'A4'};
 
 //config
 app.set('view engine', 'ejs');
 
 //middleware
+app.use(express.json());
 app.use('/xyz', express.static('assets'));
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(exSession({secret: 'my secret value', saveUninitialized: true, resave: false }));
 app.use(cookieParser());
+//app.use(expressValidator());
 
 app.use('/login', login);
 app.use('/home', home);

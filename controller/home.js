@@ -4,30 +4,37 @@ const buyerModel	= require.main.require('./models/buyerModel');
 const freelancerModel	= require.main.require('./models/freelancerModel');
 const joblistModel		=require.main.require('./models/joblistModel')
 const router 	= express.Router();
+var pdf        = require('html-pdf');
+var fs         = require('fs');
+var options    = {format:'A4'};
+
 
 router.get('/', (req, res)=>{
+	if(req.cookies['uname'] != null){
+		joblistModel.getcount(function(results){
+			console.log(results);
+			buyerModel.getcount(function(count){
+					//console.log(count);
+					freelancerModel.getcount(function(count2){
+						//console.log(count2);
 	
-	joblistModel.getcount(function(results){
-		console.log(results);
-		buyerModel.getcount(function(count){
-				//console.log(count);
-				freelancerModel.getcount(function(count2){
-					//console.log(count2);
-
-					res.render('home/index', {userlist: results, bc: count,fc: count2 });
-				});		
+						res.render('home/index', {userlist: results, bc: count,fc: count2 });
+					});		
+			});
+			
 		});
-		
-	});
+	}
+	else{
+		res.redirect('/login');
+	}
+	
 
-	// res.render('home/index');// remove it after you have done your work
+	//res.render('home/index');// remove it after you have done your work
 
+});
 
-	// if(req.cookies['uname'] != null){
-	// 	res.render('home/index');
-	// }else{
-	// 	res.redirect('/login');
-	// }
+router.get('/print',(req,res)=>{
+   
 });
 
 router.get('/joblist', (req, res)=>{
@@ -42,6 +49,7 @@ router.get('/joblist', (req, res)=>{
 	// });
 	
 });
+
 router.get('/joblist/delete/:id', (req, res)=>{
 	// a_id = req.params.id;
 	// console.log(a_id);
@@ -75,6 +83,57 @@ router.get('/joblist/delete/:id', (req, res)=>{
 	});
 	
 })
+
+////////////////////////freelancer work//////////////////////////////////////////////////////////
+router.get('/free_joblist', (req, res)=>{
+	
+	joblistModel.getAll(function(results){
+        //console.log(results);
+		res.render('home/free_joblist', {userlist: results});
+	});
+	//res.render('home/joblist');// remove it after you have done your work
+	// chatModel.getByname(req.cookies['uname'],function(results){
+	// 	res.render('home/inbox', {userlist: results});
+	// });
+	
+});
+
+router.get('/joblist/apply/:id', (req, res)=>{
+	// a_id = req.params.id;
+	// console.log(a_id);
+	joblistModel.getById(req.params.id, function(results){
+    console.log("obj",results);		
+    var user = {
+			id : req.params.id,
+			buyer_uname: results[0].buyer_uname,
+			buyer_email: results[0].buyer_email,  //user.buyer_uname, user.buyer_email, user.job_desc, user.job_date, user.salary, user.freelancer_uname 
+			job_desc: 	results[0].job_desc,
+			job_date:    results[0].job_date, 
+			salary:   	 results[0].salary,
+			freelancer_uname:  results[0].freelancer_uname
+			//member: result.member
+			 // need to check for radio button
+            };
+            console.log("user",user);	
+    //     joblistModel.delete(user, function(status){
+	// 	if(status){
+    //         joblistModel.getAll(function(results){
+    //             res.render('home/joblist', {userlist: results});
+    //     });
+	// 		//res.render('adFreelancerlist/adminFreelancerlist');// need to change the path
+	// 	}else{
+
+	// 		res.redirect('/home/joblist');
+	// 	}
+	// });
+			//res.render('/adBuyerlist/delete', {userlist:results});
+			 //console.log(userlist);
+	});
+	
+})
+
+//////////freelancer work ends here/////////////////////////////////////////////////////////////////////////////////
+
 router.get('/info', (req, res)=>{
 	
 	//res.render('home/index');// remove it after you have done your work
