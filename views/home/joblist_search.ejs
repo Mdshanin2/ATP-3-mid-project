@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<%- include ('../home/admin_header')%>
+
+
+<table>
+   
+    <% if(mysqli_num_rows($rs)>0) {  %>
+        <% output += '<h4 align="center">Search Result </h4>'%>
+        <% output += '<div class="table-responsive">
+                    <table class="table table bordered">
+                    <thead>
+                    <th>id</th> 
+                    <th> Buyer_uname</th>
+                    <th>Buyer_email</th>
+                    <th> Job_desc</th>
+                    <th> job_date</th>
+                    <th>Salary</th>
+                    <th></th>
+                    
+                </thead>'%>
+
+                <% for(var i=0; i< userlist.length; i++ ){ %>
+                    <% output += '<tr>
+						<td><% userlist[i].id %></td>
+						<td><% userlist[i].buyer_uname %></td>
+						<td><% userlist[i].buyer_email%></td>
+						<td><% userlist[i].job_desc %></td>
+						<td><% userlist[i].job_date %></td>
+						<td><% userlist[i].salary %></td>
+						<!-- <td><%= userlist[i].freelancer_uname %></td> -->
+						<!-- <td><a href="/admin_buyerlist/edit/<%=userlist[i].id%>"class="btn btn-success">Edit</a></td>   -->
+						<td><a href="/home/joblist/delete/<%=userlist[i].id%>" class="btn btn-danger">Delete</a></td>  
+						
+					</tr>'%>
+					<% } %>
+       
+                    <%=output %>;
+        <% } %>
+ 

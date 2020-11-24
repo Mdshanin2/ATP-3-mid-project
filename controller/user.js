@@ -21,34 +21,49 @@ router.post('/create', (req, res)=>{
          // need to check for radio button
 	};
 //need to get the member if member = buyer then sent to buyermodel else, freelancer model
-console.log(user.member);
+console.log(user);
 if (user.member=="buyer" )
 {    
 buyerModel.insert(user, function(status){ //using usermodel to validate with the database
-		if(status){
+	console.log("inside the if for buyer"); 
+	if(status){
+			console.log("inside the insert for buyer"); 
 			//res.cookie('uname', req.body.username);
-            res.redirect('/admin_buyerlist');//need to change	 // check if i can send an alert or not for insertion done
+			buyerModel.getAll(function(results){
+			res.render('adBuyerlist/adminBuyerlist',{userlist: results});//need to change	 // check if i can send an alert or not for insertion done
+			});
 		}else{
-			res.redirect('user/create');
+			res.redirect('/user/create');
 		}
 	});
 }
-if(user.member=="freelancer"){  
+else if(user.member=="freelancer"){  
     freelancerModel.insert(user, function(status){ //using usermodel to validate with the database
+		console.log("inside the if for freelancer"); 
 		if(status){
+			console.log("inside the inser for freelancer"); 
 			//res.cookie('uname', req.body.username);
-            res.redirect('/admin_freelancerlist');//need to change	 // check if i can send an alert or not
+			freelancerModel.getAll(function(results){
+			res.render('adFreelancerlist/adminFreelancerlist',{userlist: results});
+			});//need to change	 // check if i can send an alert or not
 		}else{
-			res.redirect('user/create');
+			res.redirect('/user/create');
 		}
     });
 }
-if(user.member=="admin"){ 
+else if(user.member=="admin"){ 
 	userModel.insert(user, function(status){
+		console.log("inside the if for admin"); 
 		if(status){
-			res.redirect('/home/userlist');// need to change
+			console.log("inside the inser for admin"); 
+			userModel.getAll(function(results){
+			//alert("insertion done");
+			res.render('home/userlist',{userlist: results});// need to change
+			});
 		}else{
-			res.redirect('user/create');
+			//alert("insertion failed as similar username exists");
+			
+			res.redirect('/user/create');
 		}
 	});
 }
@@ -103,8 +118,10 @@ router.post('/edit/:id', (req, res)=>{
 	};
 	userModel.update(user, function(status){
 		if(status){
-			res.redirect('/home/userlist');// need to change the path
-		}else{
+			userModel.getAll(function(results){
+			res.render('home/userlist',{userlist: results});// need to change the path
+		});}
+		else{
 			res.redirect('user/create');
 		}
 	});
@@ -133,11 +150,17 @@ router.post('/delete/:id', (req, res)=>{
         member: req.body.member
          // need to check for radio button
 	};
+	console.log ("delete", user);
 	userModel.delete(user, function(status){
 		if(status){
-			res.redirect('/home/userlist');// need to change the path
+			console.log("deletion of admin done" );
+			userModel.getAll(function(results){
+				res.render('home/userlist',{userlist: results});// need to change the path
+			});
+
+			//res.render('home/userlist');// need to change the path
 		}else{
-			res.redirect('user/create');
+			res.redirect('/user/create');
 		}
 	});
 	//delete from DB

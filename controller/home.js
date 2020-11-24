@@ -33,8 +33,20 @@ router.get('/', (req, res)=>{
 
 });
 
-router.get('/print',(req,res)=>{
+router.get('/search/:word',(req,res)=>{
    
+	joblistModel.getsearch(req.params.word, function(results){
+		if(results){
+
+                res.render('home/joblist_search', {userlist: results});
+        
+			//res.render('adFreelancerlist/adminFreelancerlist');// need to change the path
+		}else{
+
+			res.redirect('/home/joblist');
+		}
+	});
+
 });
 
 router.get('/joblist', (req, res)=>{
@@ -134,7 +146,7 @@ router.get('/joblist/apply/:id', (req, res)=>{
 
 //////////freelancer work ends here/////////////////////////////////////////////////////////////////////////////////
 
-router.get('/info', (req, res)=>{
+router.get('/admin_info', (req, res)=>{
 	
 	//res.render('home/index');// remove it after you have done your work
 	userModel.getByname(req.cookies['uname'],function(results){

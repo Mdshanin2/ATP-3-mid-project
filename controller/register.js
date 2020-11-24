@@ -31,7 +31,7 @@ if (user.member=="buyer" )
 buyerModel.insert(user, function(status){ //using usermodel to validate with the database
 		if(status){
 			//res.cookie('uname', req.body.username);
-            res.redirect('/login');	 // check if i can send an alert or not for insertion done
+            res.render('login');	 // check if i can send an alert or not for insertion done
 		}else{
 			res.redirect('/register');
 		}
@@ -41,7 +41,7 @@ if(user.member=="freelancer"){
     freelancerModel.insert(user, function(status){ //using usermodel to validate with the database
 		if(status){
 			//res.cookie('uname', req.body.username);
-            res.redirect('/login');	 // check if i can send an alert or not
+            res.render('login');	 // check if i can send an alert or not
 		}else{
 			res.redirect('/register');
 		}

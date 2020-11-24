@@ -26,8 +26,6 @@ module.exports ={
 		});
 	},
 
-
-	
 	getAll: function(callback){
 		var sql = "select * from admins";
 		db.getResults(sql, null, function(results){
@@ -35,23 +33,23 @@ module.exports ={
 		});
 	},
 	insert: function(user, callback){
-		var sql = "insert into admins VALUES (?, ?, ?, ?)";
+		var sql = "insert into admins VALUES (?, ?, ?, ?, ?, ?, ?)";
 
-		db.execute(sql, ['', user.username, user.password, user.type], function(status){
+		db.execute(sql, ['',user.fname,user.username, user.password, user.email, user.phone, user.address ], function(status){
 			callback(status);
 		});
 	},
 	update: function(user,callback){
-        var sql = "UPDATE admins SET fname = ?, password =?, email= ?, phone= ?, address=? WHERE  username = ? ";
+        var sql = "UPDATE admins SET fname = ?, password =?, email= ?, phone= ?, address=? WHERE  username = ?";
 
-		db.execute(sql, [ user.fname, user.password, user.email, user.phone, user.address, user.username], function(status){
+		db.execute(sql, [user.fname, user.password, user.email, user.phone, user.address, user.username], function(status){
 			callback(status);
 		});
 	},
 	delete: function(user,callback){
-        var sql = "DELETE FROM admins WHERE username= ? and password= ? ";
+        var sql = "DELETE FROM admins WHERE username= ? ";
 
-		db.execute(sql, [ user.username, user.password], function(status){
+		db.execute(sql, [user.username], function(status){
 			callback(status);
         
 	    });

@@ -2,29 +2,7 @@
 <%- include ('../home/admin_header')%>
 	
 <h1>This is admin create user page goes to user.js controller </h1>
-	<!-- <form method="post">
-		<fieldset>
-			<legend>Create User</legend>
-			<table>
-				<tr>
-					<td>Username</td>
-					<td><input type="text" name="username"></td>
-				</tr>
-				<tr>
-					<td>Password</td>
-					<td><input type="password" name="password"></td>
-				</tr>
-				<tr>
-					<td>Type</td>
-					<td><input type="text" name="type"></td>
-				</tr>
-				<tr>
-					<td></td>
-					<td><input type="submit" name="submit" value="Create"></td>
-				</tr>
-			</table>
-		</fieldset>
-	</form> -->
+	
 
 <!-- ///////////////////need to cut the upper form/////////////////// -->
 
@@ -149,9 +127,9 @@
 				valid=false;
 			}
 		
-			 if (phone==""|| phone.length == 11 )
+			 if (phone==""|| phone.length != 11 )
 			{
-				document.getElementById("err_phone").innerHTML="Phone number Required";
+				document.getElementById("err_phone").innerHTML="wrong Phone number ";
 				valid=false;
 			}
 

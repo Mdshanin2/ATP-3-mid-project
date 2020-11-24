@@ -12,6 +12,13 @@ module.exports ={
 			}
 		});
 	},
+	getsearch: function(id,callback){
+		var sql= "select * from job_list where buyer_uname like '%?%'";
+		db.getResults(sql, [id], function(results){
+			callback(results);
+		});
+	},
+
 	getById: function(id,callback){
 		var sql= "select * from job_list where id=? ";
 		db.getResults(sql, [id], function(results){

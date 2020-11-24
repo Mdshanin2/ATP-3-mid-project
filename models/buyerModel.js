@@ -54,9 +54,9 @@ module.exports ={
 		});
 	},
 	delete: function(user,callback){
-        var sql = "DELETE FROM buyers WHERE username= ? and password= ?  "; //and password= ?
+        var sql = "DELETE FROM buyer WHERE username= ?"; //and password= ?
 
-		db.execute(sql, [ user.username, user.password ], function(status){  //, user.password (if you need it )
+		db.execute(sql, [ user.username], function(status){  //, user.password (if you need it )
 			callback(status);
         
 	    });
