@@ -11,7 +11,7 @@
         <hr>
         </div >
         <div class="form">
-        <form method="post" onsubmit="return validate_form()" action="" enctype="multipart/form-data">
+        <form method="post" onsubmit="return validate_form()" action="" enctype="">
                 <!-- <table> -->
     
                         <div class="textbox">
@@ -39,9 +39,10 @@
                         
                         <input type="password"  placeholder="password" name="pass" id="pass"><span style="color:red" id="err_pass" name ="err_pass"></span>
                         <input type="password"  placeholder="re-type password" name="pass2" id="pass2" >
-                        
-                        <!-- <span style="color:red"><?php echo $err_pass;?></span>
-                        <span style="color:red"><?php echo $err_pass2;?></span> -->
+                       
+                            
+                        <!-- <span style="color:red">< <span style="color:red"><?php ec?php echo $err_pass;?></span>
+                       ho $err_pass2;?></span> -->
                         
                         
                     
@@ -55,7 +56,6 @@
                         <!-- <span style="color:red"><?php echo $err_email;?></span> -->
                         <!-- <br><span>Email</span> -->
                         
-                    
                     </div>
                     
                     <div class="textbox">
@@ -108,7 +108,16 @@
                         <input type="radio" name="member" value="buyer"> Buyer
                         <span style="color:red" id="err_member" name ="err_member"></span>
                     </div>                   
-                
+                   
+                    <div> <span style="color:red"><% if (locals.errors) { %>
+                    <ul>
+                    <% Object.values(errors).forEach(function(error){ %>
+                    <li><%= error.msg %></li>
+                    <% }); %>
+                    </ul>
+                    <% } %></span></div>
+                   
+
                     <div class="cnt">
                             <input type="submit" align="center" class="btn btn1" name="submit" value="Submit">
                     </div>	                    

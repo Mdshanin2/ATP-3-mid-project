@@ -10,11 +10,11 @@
 	<a href="/home">Back</a> |
 	<a href="/logout">logout</a>
 	<br> -->
-	<!-- <span class="input-group-addon">Search</span>  -->
+	<!-- <span class="input-group-addon">Search</span>  onkeyup="search()"-->
 	<div class="form-group">
 		<div class="input-group">
 			
-			<input type="text" name="search_text"  id="search_input" onkeyup="search()" placeholder="Search product Name" class="search" >
+			<input type="text" name="search_input"  id="search_input"  placeholder="Search product Name" class="search" >
 		</div>
 	
 	</div>
@@ -56,7 +56,7 @@
 			</tbody>
 		</table>
 	</div>
-	
+	<div id="info"></div>
 	
 	<script>
 			
@@ -76,43 +76,62 @@
 		
 	// create xl sheet  use the top functions 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-				function call_ajax()
+	// 			function call_ajax()
+	// 			{
+	// 			 var http= new XMLHttpRequest();
+	// 			  http.onreadystatechange=function()
+	// 			  {
+	// 				if (this.readyState == 4 && this.status == 200)
+	// 				{
+	// 					alert(http.responseText);
+	// 				} 
+	
+	// 				else if (http.status==404)
+	// 				{alert("file not found");
+	// 				}
+	
+	
+	
+	// 			  }
+	// 				// http.open("GET","another.php",true);
+	// 				// http.send();
+	// 			}
+	// // ----------------------------how search works-------------- 
+	// 			   function search()
+	// 			   { debugger;
+	// 				 var http =new XMLHttpRequest();
+	// 				 var search_word= document.getElementById("search_input").value;
+	// 				 http.onreadystatechange= function()
+	// 				 {
+	// 					 if(http.readyState== 4 && http.status== 200)
+	// 					 {
+	// 						 document.getElementById("search_result").innerHTML= http.responseText;
+	// 					 }
+	// 				 }
+	// 				http.open("GET","search_products.php?sk="+search_word,true);// need work here
+	// 				// http.open("GET","joblist_search.ejs?sk="+search_word,true);
+	// 				http.send();
+	
+	// 			   } 
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////
+				$(document).ready(function(){
+				$('#search_input').keyup(function()
 				{
-				 var http= new XMLHttpRequest();
-				  http.onreadystatechange=function()
-				  {
-					if (this.readyState == 4 && this.status == 200)
-					{
-						alert(http.responseText);
-					} 
-	
-					else if (http.status==404)
-					{alert("file not found");
-					}
-	
-	
-	
-				  }
-					// http.open("GET","another.php",true);
-					// http.send();
-				}
-	// ----------------------------how search works-------------- 
-				   function search()
-				   { debugger;
-					 var http =new XMLHttpRequest();
-					 var search_word= document.getElementById("search_input").value;
-					 http.onreadystatechange= function()
-					 {
-						 if(http.readyState== 4 && http.status== 200)
-						 {
-							 document.getElementById("search_result").innerHTML= http.responseText;
-						 }
-					 }
-					http.open("GET","search_products.php?sk="+search_word,true);// need work here
-					// http.open("GET","joblist_search.ejs?sk="+search_word,true);
-					http.send();
-	
-				   } 
+					console.log(this.value);
+					$.ajax({
+
+						url: '/home/ajaxsearch/'+this.value,
+						method: 'get',
+						datatype : 'json',
+						data : {'name':name},
+						contentType : "application/x-www-form-urlencoded",
+						success:function(response){
+
+							$('#mytable').html(response);
+						}
+					});
+				});
+				});
 				
 			</script>
 </body>

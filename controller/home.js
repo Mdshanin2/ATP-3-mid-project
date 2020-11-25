@@ -2,7 +2,7 @@ const express 	= require('express');
 const userModel = require.main.require('./models/userModel');
 const buyerModel	= require.main.require('./models/buyerModel');
 const freelancerModel	= require.main.require('./models/freelancerModel');
-const joblistModel		=require.main.require('./models/joblistModel')
+const joblistModel		=require.main.require('./models/joblistModel');
 const router 	= express.Router();
 var pdf        = require('html-pdf');
 var fs         = require('fs');
@@ -33,21 +33,48 @@ router.get('/', (req, res)=>{
 
 });
 
-router.get('/search/:word',(req,res)=>{
-   
-	joblistModel.getsearch(req.params.word, function(results){
-		if(results){
+router.get('/ajaxsearch/:id',(req,res)=>{
 
-                res.render('home/joblist_search', {userlist: results});
-        
-			//res.render('adFreelancerlist/adminFreelancerlist');// need to change the path
-		}else{
+	var txt = req.body.search_input;
 
-			res.redirect('/home/joblist');
-		}
-	});
+	console.log(txt);
+
+	var word = req.params.id;
+	console.log('word value '+word);
+	if(word!=null || word!=undefined || txt!=null)
+	{
+		joblistModel.getsearch(word, function(results){
+
+			var str = "";
+			for(i=0;i<results.length;i++)
+			{
+				str+='<a style="position:relative; left:30px; font-size:20px; margin-top:50px;" href="/user/hmedit/'+results[i].id+'">'+results[i].buyer_uname+'</a><br><br>';
+
+			}
+			console.log("in ajax "+str);
+			//res.render('user/edit', {users: results});
+			res.send(str);
+
+		});
+	}
+	
 
 });
+// router.get('/search/:word',(req,res)=>{
+   
+// 	joblistModel.getsearch(req.params.word, function(results){
+// 		if(results){
+
+//                 res.render('home/joblist_search', {userlist: results});
+        
+// 			//res.render('adFreelancerlist/adminFreelancerlist');// need to change the path
+// 		}else{
+
+// 			res.redirect('/home/joblist');
+// 		}
+// 	});
+
+// });
 
 router.get('/joblist', (req, res)=>{
 	
