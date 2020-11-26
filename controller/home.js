@@ -52,8 +52,8 @@ router.get('/ajaxsearch/:id',(req,res)=>{
 
 			}
 			console.log("in ajax "+str);
-			//res.render('user/edit', {users: results});
-			res.send(str);
+						//res.render('user/edit', {users: results});
+			res.json({userlist: results});
 
 		});
 	}
@@ -181,7 +181,7 @@ router.get('/admin_info', (req, res)=>{
 	});
 	
 });
-router.post('/info', (req, res)=>{
+router.post('/admin_info', (req, res)=>{
 	
 	var user = {
         fname: 	  req.body.fname,
@@ -205,7 +205,7 @@ router.post('/info', (req, res)=>{
 			});// need to change the path
 		}else{
 			//alert("something wrong cannot update");
-			res.redirect('/home/info');
+			res.redirect('/home/admin_info');
 		}
     });
 		

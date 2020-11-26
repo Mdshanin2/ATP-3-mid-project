@@ -1,13 +1,14 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.3
+-- version 5.0.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 22, 2020 at 09:39 PM
--- Server version: 10.4.14-MariaDB
--- PHP Version: 7.2.34
+-- Generation Time: Nov 26, 2020 at 01:25 PM
+-- Server version: 10.4.11-MariaDB
+-- PHP Version: 7.2.27
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -33,7 +34,7 @@ CREATE TABLE `admins` (
   `username` varchar(30) NOT NULL,
   `password` varchar(30) NOT NULL,
   `email` varchar(30) NOT NULL,
-  `phone` int(11) NOT NULL,
+  `phone` varchar(11) NOT NULL,
   `address` varchar(250) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -42,7 +43,9 @@ CREATE TABLE `admins` (
 --
 
 INSERT INTO `admins` (`id`, `fname`, `username`, `password`, `email`, `phone`, `address`) VALUES
-(1, 'Md shanin', 'shanin', '123', 'shanin@gmail.com', 1354534766, 'uttara dhaka');
+(1, 'Md shanin', 'shanin', '123', 'shanin@gmail.com', '01869217629', 'uttara dhaka'),
+(10, 'sam bob', 'bob', '123', 'bob@gmail.com', '1781465445', 'dhanmondi'),
+(12, 'bob sam', 'as', '123', 'as@gmail.com', '01869217629', 'dhanmondi');
 
 -- --------------------------------------------------------
 
@@ -65,7 +68,8 @@ CREATE TABLE `buyer` (
 --
 
 INSERT INTO `buyer` (`id`, `fname`, `username`, `password`, `email`, `phone`, `address`) VALUES
-(1, 'sumaiya sultana', 'sumaiya', '234', 'sumaiya@gmail.com', 1354539786, 'dhanmondi 4 road:3 house:2 4thfloor');
+(1, 'sumaiya sultana', 'sumaiya', '234', 'sumaiya@gmail.com', 1354539786, 'dhanmondi 4 road:3 house:2 4thfloor'),
+(6, 'sam wilson', 'sam', '123', 'sam@gmail.com', 1869217629, 'dhanmondi');
 
 -- --------------------------------------------------------
 
@@ -100,7 +104,9 @@ INSERT INTO `chat` (`id_chat`, `message`, `date`, `username`, `Admin_Username`, 
 (35, 'hello', '2020-11-23', 'shanin', 'abir', 'abir'),
 (36, 'hello', '2020-11-23', 'abir', 'shanin', 'shanin'),
 (37, 'good', '2020-11-23', 'abir', 'shanin', 'abir'),
-(38, 'hello', '2020-11-23', 'abir', 'shanin', 'abir');
+(38, 'hello', '2020-11-23', 'abir', 'shanin', 'abir'),
+(39, 'hye', '2020-11-25', 'abir', 'shanin', 'shanin'),
+(40, 'to you', '2020-11-25', 'abir', 'shanin', 'abir');
 
 -- --------------------------------------------------------
 
@@ -124,7 +130,9 @@ CREATE TABLE `freelancer` (
 
 INSERT INTO `freelancer` (`id`, `fname`, `username`, `password`, `email`, `phone`, `address`) VALUES
 (1, 'abir islam', 'abir', '456', 'abir@gmail.com', 1354536547, 'mirpur: 7, road:36, house:3, 4thfloor'),
-(2, 'adsd', 'sda', 'eqwe', 'asda', 213, 'asdsad');
+(2, 'adsd', 'sda', 'eqwe', 'asda', 213, 'asdsad'),
+(4, 'sa', 'aa', '12', 'sA', 213, '21'),
+(9, 'as', 'as', '123', 'as@gmail.com', 1781465445, 'dhanmondi');
 
 -- --------------------------------------------------------
 
@@ -194,25 +202,25 @@ ALTER TABLE `job_list`
 -- AUTO_INCREMENT for table `admins`
 --
 ALTER TABLE `admins`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT for table `buyer`
 --
 ALTER TABLE `buyer`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `chat`
 --
 ALTER TABLE `chat`
-  MODIFY `id_chat` int(10) NOT NULL AUTO_INCREMENT COMMENT '1', AUTO_INCREMENT=39;
+  MODIFY `id_chat` int(10) NOT NULL AUTO_INCREMENT COMMENT '1', AUTO_INCREMENT=41;
 
 --
 -- AUTO_INCREMENT for table `freelancer`
 --
 ALTER TABLE `freelancer`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `job_list`
