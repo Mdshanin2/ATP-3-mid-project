@@ -13,6 +13,7 @@ const reg			= require('./controller/register');// added the controller to the re
 const adbuyer		= require('./controller/adBuyerlist');
 const admfree        = require('./controller/adFreelancerlistCon');
 const inbox        = require('./controller/inboxCon');
+const buyer        = require('./controller/bHome');//----------------Buyer
 const freelancer_inbox        = require('./controller/Freelancer_inboxCon');
 //const job			= require('./controller/joblistCon');
 //freelancer
@@ -35,6 +36,7 @@ app.use(cookieParser());
 //app.use(expressValidator());
 
 app.use('/login', login);
+app.use('/buyer', buyer);
 app.use('/home', home);
 app.use('/logout', logout);
 app.use('/user', user);
