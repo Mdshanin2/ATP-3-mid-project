@@ -7,6 +7,9 @@ const financeModel	= require.main.require('./models/financeModel');
 const companyPlanModel	= require.main.require('./models/companyPlanModel');
 const freelancerModel	= require.main.require('./models/freelancerModel');
 
+const bodyParser    = require('body-parser');
+const{check,validationResult } = require('express-validator');
+
 const router 	= express.Router();
 const PDFDocument	= require('pdfkit');
 const fs 			= require('fs');
@@ -201,21 +204,48 @@ router.get('/', (req, res)=>{
         res.render('review/create'); 
     })
     
-    router.post('/review/create', (req, res)=>{
-    
-        var user = {
-            fname  : req.body.fname,
-            review : req.body.review,
-            date   : req.body.date
-        };
-    
-        reviewModel.insert(user, function(status){
-            if(status){
-                res.render('/buyer');
-             }else{
-                 res.render('/review/create');
-             }
-        });
+    router.post('/review/create', [
+        check('fname')
+            .notEmpty().withMessage('Can not be empty')
+            .isLength({ min: 3 }).withMessage('Minimumm length must need to be 3')
+        ,
+        check('review')
+            .notEmpty().withMessage('Can not be empty')
+        ,
+        check('date')
+            .notEmpty().withMessage('Date can not be empty')
+        ] ,(req, res)=>{
+        
+        const errors = validationResult(req);
+        if(errors.isEmpty())
+        {
+            var user = {
+                fname  : req.body.fname,
+                review : req.body.review,
+                date   : req.body.date
+            };
+        
+            reviewModel.insert(user, function(status){
+                if(status){
+                    res.redirect('/buyer');
+                 }else{
+                     res.redirect('/review/create');
+                 }
+            });
+        }
+        else
+        {
+            console.log(errors.array());
+            var error = errors.array();
+            var errormassage = ``;
+
+            for(i=0 ; i<error.length ; i++)
+            {
+                errormassage=errormassage+ error[i].param + " : " + error[i].msg;
+            }
+
+            res.status(200).send({ status : errormassage });
+        }
     })
 
     router.get('/report', (req, res)=>{

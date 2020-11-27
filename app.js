@@ -24,13 +24,15 @@ var pdf        = require('html-pdf');
 var fs         = require('fs');
 var options    = {format:'A4'};
 
+const{check,validationResult } = require('express-validator');
+
 //config
 app.set('view engine', 'ejs');
 
 //middleware
 app.use(express.json());
 app.use('/xyz', express.static('assets'));
-app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.urlencoded({extended: true}));
 app.use(exSession({secret: 'my secret value', saveUninitialized: true, resave: false }));
 app.use(cookieParser());
 //app.use(expressValidator());

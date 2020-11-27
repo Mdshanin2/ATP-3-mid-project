@@ -45,8 +45,7 @@ module.exports ={
 		});
 	},
 	insert: function(user, callback){
-		var sql = "insert into job_list VALUES (?, ?, ?, ?)";
-
+		var sql = "insert into review VALUES (?, ?, ?, ?)";
 		db.execute(sql, ['', user.fname, user.review, user.date], function(status){
 			callback(status);
 		});
