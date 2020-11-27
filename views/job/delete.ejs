@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Delete Job</title>
+</head>
+<body>
+	<form method="post">
+		<fieldset>
+			<legend>Delete Job</legend>
+			<table>
+				<tr>
+					<td>Buyer Name :</td>
+					<td><%=value[0].buyer_uname %></td>
+				</tr>
+				<tr>
+					<td>Buyer Email :</td>
+					<td><%=value[0].buyer_email %></td>
+				</tr>
+				<tr>
+					<td>Job Description :</td>
+					<td><%=value[0].job_desc %></td>
+				</tr>
+				<tr>
+					<td>Job Date :</td>
+					<td><%=value[0].job_date %></td>
+				</tr>
+				<tr>
+					<td>Salary :</td>
+					<td><%=value[0].salary %></td>
+				</tr>
+			</table>
+			<div>
+				<h3>Are you sure?</h3>
+				<input type="submit" name="submit" value="Confirm">
+			</div>
+		</fieldset>
+	</form>
+</body>
+</html>

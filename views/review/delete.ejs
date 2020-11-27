@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Delete Review</title>
+</head>
+<body>
+	<form method="post">
+		<fieldset>
+			<legend>Delete Review</legend>
+			<table>
+				<tr>
+					<td>Freelancer Name :</td>
+					<td><%=value[0].fname %></td>
+				</tr>
+				<tr>
+					<td>Review :</td>
+					<td><%=value[0].review %></td>
+				</tr>
+				<tr>
+					<td>Date :</td>
+					<td><%=value[0].date %></td>
+				</tr>
+			</table>
+			<div>
+				<h3>Are you sure?</h3>
+				<input type="submit" name="submit" value="Confirm">
+			</div>
+		</fieldset>
+	</form>
+</body>
+</html>

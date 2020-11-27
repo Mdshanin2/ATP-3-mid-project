@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html>
+<title>W3.CSS</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<body>
+
+<div class="w3-sidebar w3-bar-block w3-light-grey w3-card" style="width:130px">
+  <h5 class="w3-bar-item">Menu</h5>
+  <button class="w3-bar-item w3-button tablink" onclick="openTab(event, 'Job List')">Job List</button>
+  <button class="w3-bar-item w3-button tablink" onclick="openTab(event, 'Create New Job')">Create New Job</button>
+  <button class="w3-bar-item w3-button tablink" onclick="openTab(event, 'Review')">Review</button>
+  <button class="w3-bar-item w3-button tablink" onclick="openTab(event, 'Create Review')">Create Review</button>
+  <button class="w3-bar-item w3-button tablink" onclick="openTab(event, 'Payment')">Payment</button>
+  <button class="w3-bar-item w3-button tablink" onclick="openTab(event, 'Billing')">Billing</button>
+  <button class="w3-bar-item w3-button tablink" onclick="openTab(event, 'Finance')">Finance</button>
+  <button class="w3-bar-item w3-button tablink" onclick="openTab(event, 'Company Plan')">Company Plan</button>
+  <button class="w3-bar-item w3-button tablink" onclick="openTab(event, 'Freelancer List')">Freelancer List</button>
+  <button class="w3-bar-item w3-button tablink" onclick="openTab(event, 'Search Freelancer')">Search Freelancer</button>
+  <button class="w3-bar-item w3-button tablink" onclick="openTab(event, 'Report Generate')">Report Generate</button>
+</div>
+
+<div style="margin-left:130px">
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <div id="Job List" class="w3-container tab" style="display:none">
+    <table border="1">
+      <tr>
+        <th>ID</th>
+        <th>Buyer Name</th>
+        <th>Buyer Email</th>
+        <th>Job Description</th>
+        <th>Date</th>
+        <th>Salary</th>
+        <th>Action</th>
+      </tr>
+  
+      <% for(var i=0; i< joblist.length; i++ ){ %>
+      <tr>
+        <td><%= joblist[i].id %></td>
+        <td><%= joblist[i].buyer_uname %></td>
+        <td><%= joblist[i].buyer_email %></td>
+        <td><%= joblist[i].job_desc %></td>
+        <td><%= joblist[i].job_date %></td>
+        <td><%= joblist[i].salary %></td>
+        <td>
+          <a href="/buyer/job/edit/<%=joblist[i].id%>">Edit</a> | 
+          <a href="/buyer/job/delete/<%=joblist[i].id%>">Delete</a>  
+        </td>
+      </tr>
+      <% } %>
+    </table>
+  </div>
+
+
+
+  <div id="Create New Job" class="w3-container tab" style="display:none">
+    <a href="/buyer/job/create">Create Job</a>
+  </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+  <div id="Review" class="w3-container tab" style="display:none">
+    <table border="1">
+      <tr>
+        <th>ID</th>
+        <th>Freelancer Name</th>
+        <th>Review</th>
+        <th>Date</th>
+        <th>Action</th>
+      </tr>
+  
+      <% for(var i=0; i< reviewlist.length; i++ ){ %>
+      <tr>
+        <td><%= reviewlist[i].id %></td>
+        <td><%= reviewlist[i].fname %></td>
+        <td><%= reviewlist[i].review %></td>
+        <td><%= reviewlist[i].date %></td>
+        <td>
+          <a href="/buyer/review/edit/<%=reviewlist[i].id%>">Edit</a> | 
+          <a href="/buyer/review/delete/<%=reviewlist[i].id%>">Delete</a>  
+        </td>
+      </tr>
+      <% } %>
+    </table>
+  </div>
+
+  <div id="Create Review" class="w3-container tab" style="display:none">
+    <a href="/buyer/review/create">Create Review</a>
+  </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+  <div id="Payment" class="w3-container tab" style="display:none">
+    <table border="1">
+      <tr>
+        <th>ID</th>
+        <th>Freelancer Name</th>
+        <th>Amount</th>
+        <th>Date</th>
+        <th>Action</th>
+      </tr>
+  
+      <% for(var i=0; i< paymentlist.length; i++ ){ %>
+      <tr>
+        <td><%= paymentlist[i].id %></td>
+        <td><%= paymentlist[i].fname %></td>
+        <td><%= paymentlist[i].amount %></td>
+        <td><%= paymentlist[i].date %></td>
+        <td>
+          <a href="/buyer/payment/edit/<%=paymentlist[i].id%>">Edit</a> 
+        </td>
+      </tr>
+      <% } %>
+    </table>
+  </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+  <div id="Billing" class="w3-container tab" style="display:none">
+    <table border="1">
+      <tr>
+        <th>ID</th>
+        <th>Freelancer Name</th>
+        <th>Amount</th>
+        <th>Tax</th>
+      </tr>
+  
+      <% for(var i=0; i< billinglist.length; i++ ){ %>
+      <tr>
+        <td><%= billinglist[i].id %></td>
+        <td><%= billinglist[i].fname %></td>
+        <td><%= billinglist[i].amount %></td>
+        <td><%= billinglist[i].tax %></td>
+      </tr>
+      <% } %>
+    </table>
+  </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+  <div id="Finance" class="w3-container tab" style="display:none">
+    <table border="1">
+      <tr>
+        <th>ID</th>
+        <th>Month</th>
+        <th>Amount</th>
+        <th>Action</th>
+      </tr>
+  
+      <% for(var i=0; i< financelist.length; i++ ){ %>
+      <tr>
+        <td><%= financelist[i].id %></td>
+        <td><%= financelist[i].month %></td>
+        <td><%= financelist[i].amount %></td>
+        <td>
+          <a href="/buyer/finance/edit/<%=financelist[i].id%>">Edit</a> 
+        </td>
+      </tr>
+      <% } %>
+    </table>
+  </div>
+
+
+
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+  <div id="Company Plan" class="w3-container tab" style="display:none">
+    <table border="1">
+      <tr>
+        <th>ID</th>
+        <th>Company Plan</th>
+        <th>Action</th>
+      </tr>
+  
+      <% for(var i=0; i< companyPlan.length; i++ ){ %>
+      <tr>
+        <td><%= companyPlan[i].id %></td>
+        <td><%= companyPlan[i].description %></td>
+        <td>
+          <a href="/buyer/companyPlan/edit/<%=companyPlan[i].id%>">Edit</a> 
+        </td>
+      </tr>
+      <% } %>
+    </table>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <div id="Freelancer List" class="w3-container tab" style="display:none">
+    <table border="1">
+      <tr>
+        <th>ID</th>
+        <th>Freelancer Name</th>
+        <th>User Name</th>
+        <th>Email</th>
+        <th>Phone</th>
+        <th>Address</th>
+      </tr>
+  
+      <% for(var i=0; i< freelancerlist.length; i++ ){ %>
+      <tr>
+        <td><%= freelancerlist[i].id %></td>
+        <td><%= freelancerlist[i].fname %></td>
+        <td><%= freelancerlist[i].username %></td>
+        <td><%= freelancerlist[i].email %></td>
+        <td><%= freelancerlist[i].phone %></td>
+        <td><%= freelancerlist[i].address %></td>
+      </tr>
+      <% } %>
+    </table>
+  </div>
+
+
+  <div id="Search Freelancer" class="w3-container tab" style="display:none">
+    <a href="/buyer/searchFreelancer">Search for Freelancer Here</a>
+  </div>
+
+
+
+
+  <div id="Report Generate" class="w3-container tab" style="display:none">
+    <a href="/buyer/report">Report Generate</a>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+
+<script>
+function openTab(evt, tabName) {
+  var i, x, tablinks;
+  x = document.getElementsByClassName("tab");
+  for (i = 0; i < x.length; i++) {
+    x[i].style.display = "none";
+  }
+  tablinks = document.getElementsByClassName("tablink");
+  for (i = 0; i < x.length; i++) {
+    tablinks[i].className = tablinks[i].className.replace(" w3-red", ""); 
+  }
+  document.getElementById(tabName).style.display = "block";
+  evt.currentTarget.className += " w3-red";
+}
+</script>
+
+</body>
+</html>
