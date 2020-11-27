@@ -59,5 +59,11 @@ module.exports ={
         callback(status);
     });
 
+	},
+	searchByUsername: function(data,callback){
+		var sql = "SELECT * FROM `freelancer` WHERE username LIKE '%"+data.username+"%' ";
+		db.getResults(sql, null, function(results){
+			callback(results);
+		});
 	}
 }
