@@ -23,7 +23,7 @@ console.log(user);
 			buyerModel.validate(user, function(status){ //need to make and work on buyerModel
 				if(status){
 					res.cookie('uname', req.body.username);
-					res.redirect('/');	//send to buyer home.ejs
+					res.redirect("/buyer");
 				}else
 					{
 					freelancerModel.validate(user, function(status){ //need to make and work on freelancer model

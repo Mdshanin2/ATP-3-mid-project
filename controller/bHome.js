@@ -13,31 +13,34 @@ const fs 			= require('fs');
 
 router.get('/', (req, res)=>{
 	
-    
-    //res.render('bHome/index')
-    joblistModel.getAll(function(results){
-       var joblist=results;
+    if(req.cookies['uname'] != null)
+    {
+        //res.render('bHome/index')
+        joblistModel.getAll(function(results){
+        var joblist=results;
 
-        reviewModel.getAll(function(results){
-         var reviewlist =results;
-            paymentModel.getAll(function(results){
-                var paymentlist=results;
-                billingModel.getAll(function(results){
-                    var billinglist=results;
-                    financeModel.getAll(function(results){
-                        var financelist=results;
-                        companyPlanModel.getAll(function(results){
-                            var companyPlan=results;
-                            freelancerModel.getAll(function(results){
-                                var freelancerlist=results;
-                                console.log(reviewlist);
-                                res.render("bHome/index",{joblist : joblist, reviewlist: reviewlist, paymentlist: paymentlist, billinglist: billinglist, financelist: financelist, companyPlan: companyPlan, freelancerlist: freelancerlist});
+            reviewModel.getAll(function(results){
+            var reviewlist =results;
+                paymentModel.getAll(function(results){
+                    var paymentlist=results;
+                    billingModel.getAll(function(results){
+                        var billinglist=results;
+                        financeModel.getAll(function(results){
+                            var financelist=results;
+                            companyPlanModel.getAll(function(results){
+                                var companyPlan=results;
+                                freelancerModel.getAll(function(results){
+                                    var freelancerlist=results;
+                                    console.log(reviewlist);
+                                    res.render("bHome/index",{joblist : joblist, reviewlist: reviewlist, paymentlist: paymentlist, billinglist: billinglist, financelist: financelist, companyPlan: companyPlan, freelancerlist: freelancerlist});
+                                });
                             });
                         });
                     });
                 });
             });
-        });
+            
+        
     });
 
     router.get('/job/edit/:id', (req, res)=>{
@@ -295,19 +298,9 @@ router.get('/', (req, res)=>{
 			res.status(200).send({ status : freelancer });
 		}); 
     })
-
-
-
-
-
-
-
-
-	// if(req.cookies['uname'] != null){
-	// 	res.render('home/index');
-	// }else{
-	// 	res.redirect('/login');
-	// }
+    }else{
+        res.redirect('/login');
+    }
 })
 
 module.exports = router;
