@@ -49,7 +49,7 @@ router.get('/', (req, res)=>{
     router.get('/job/edit/:id', (req, res)=>{
 
        var data=req.params.id;
-        joblistModel.getById(data, function(results){
+        joblistModel.getAll(data, function(results){
             console.log(results);
             res.render('job/edit', {value: results});
         });
@@ -237,14 +237,72 @@ router.get('/', (req, res)=>{
         {
             console.log(errors.array());
             var error = errors.array();
-            var errormassage = ``;
+            var errormessage = ``;
 
             for(i=0 ; i<error.length ; i++)
             {
-                errormassage=errormassage+ error[i].param + " : " + error[i].msg;
+                errormessage=errormessage+ error[i].param + " : " + error[i].msg;
             }
 
-            res.status(200).send({ status : errormassage });
+            res.status(200).send({ status : errormessage });
+        }
+    })
+
+    router.get('/job/create', (req, res)=>{
+        res.render('job/create'); 
+    })
+    
+    router.post('/job/create', [
+        check('buyer_uname')
+            .notEmpty().withMessage('Can not be empty')
+            .isLength({ min: 3 }).withMessage('Minimumm length must need to be 3')
+        ,
+        check('buyer_email')
+            .notEmpty().withMessage('Can not be empty')
+            .isLength({ min: 3 }).withMessage('Minimumm length must need to be 3')
+        ,
+        check('job_desc')
+            .notEmpty().withMessage('Can not be empty')
+            .isLength({ min: 10 }).withMessage('Minimumm length must need to be 10')
+        ,
+        check('job_date')
+            .notEmpty().withMessage('Date can not be empty')
+        ,
+        check('salary')
+            .notEmpty().withMessage('salary can not be empty')
+        ] ,(req, res)=>{
+        
+        const errors = validationResult(req);
+        if(errors.isEmpty())
+        {
+            var user = {
+                buyer_uname  : req.body.buyer_uname,
+                buyer_email  : req.body.buyer_email,
+                job_desc     : req.body.job_desc,
+                job_date     : req.body.job_date,
+                salary       : req.body.salary
+            };
+        
+            joblistModel.insert(user, function(status){
+                if(status){
+                    res.redirect('/buyer');
+                 }else{
+                     res.redirect('/buyer/job/create');
+                 }
+            });
+        }
+        else
+        {
+            console.log(errors.array());
+            var error = errors.array();
+            var errormessage = ``;
+
+            for(i=0 ; i<error.length ; i++)
+            {
+                errormessage=errormessage+ error[i].param + " : " + error[i].msg;
+            }
+
+            res.status(200).send({ status : errormessage });
         }
     })
 

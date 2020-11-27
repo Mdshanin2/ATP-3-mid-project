@@ -28,7 +28,7 @@ module.exports ={
 	
 	getAll: function(callback){
 		var sql= "select * from job_list";
-		db.getResults(sql, [id], function(results){
+		db.getResults(sql, null, function(results){
 			callback(results);
 		});
 	},
@@ -47,16 +47,9 @@ module.exports ={
 		});
 	},
 
-	
-	getAll: function(callback){
-		var sql = "select * from job_list WHERE freelancer_uname='' ";
-		db.getResults(sql, null, function(results){
-			callback(results);
-		});
-	},
 	insert: function(user, callback){
 		var sql = "insert into job_list VALUES (?, ?, ?, ?, ?, ?, ?)";
-		db.execute(sql, ['', user.buyer_uname, user.buyer_email, user.job_desc, user.job_date, user.salary, user.freelancer_uname], function(status){
+		db.execute(sql, ['', user.buyer_uname, user.buyer_email, user.job_desc, user.job_date, user.salary, '123'], function(status){
 			callback(status);
 		});
 	},
