@@ -49,7 +49,7 @@ router.get('/', (req, res)=>{
     router.get('/job/edit/:id', (req, res)=>{
 
        var data=req.params.id;
-        joblistModel.getAll(data, function(results){
+        joblistModel.getById(data, function(results){
             console.log(results);
             res.render('job/edit', {value: results});
         });
@@ -63,8 +63,8 @@ router.get('/', (req, res)=>{
 
       }
         
-         joblistModel.update(data, function(results){
-             console.log(results);
+         joblistModel.update(data, function(status){
+             console.log(status);
              res.redirect('/buyer');
          });
      })
