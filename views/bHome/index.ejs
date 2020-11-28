@@ -3,27 +3,32 @@
 <title>W3.CSS</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-<body>
+<link rel="stylesheet" href="/xyz/buyer/css/style.css">
 
-<div class="w3-sidebar w3-bar-block w3-light-grey w3-card" style="width:130px">
+<body>
+  <div class="w3-container w3-blue">
+    <h1>Buyer</h1>
+  </div>
+<div class="w3-sidebar w3-bar-block w3-light-grey w3-card" style="width:230px">
   <h5 class="w3-bar-item">Menu</h5>
   <button class="w3-bar-item w3-button tablink" onclick="openTab(event, 'Job List')">Job List</button>
-  <button class="w3-bar-item w3-button tablink" onclick="openTab(event, 'Create New Job')">Create New Job</button>
+  <a class="w3-bar-item w3-button" href="/buyer/job/create">Create New Job</a>
   <button class="w3-bar-item w3-button tablink" onclick="openTab(event, 'Review')">Review</button>
-  <button class="w3-bar-item w3-button tablink" onclick="openTab(event, 'Create Review')">Create Review</button>
+  <a class="w3-bar-item w3-button" href="/buyer/review/create">Create Review</a>
   <button class="w3-bar-item w3-button tablink" onclick="openTab(event, 'Payment')">Payment</button>
   <button class="w3-bar-item w3-button tablink" onclick="openTab(event, 'Billing')">Billing</button>
   <button class="w3-bar-item w3-button tablink" onclick="openTab(event, 'Finance')">Finance</button>
   <button class="w3-bar-item w3-button tablink" onclick="openTab(event, 'Company Plan')">Company Plan</button>
   <button class="w3-bar-item w3-button tablink" onclick="openTab(event, 'Freelancer List')">Freelancer List</button>
-  <button class="w3-bar-item w3-button tablink" onclick="openTab(event, 'Search Freelancer')">Search Freelancer</button>
-  <button class="w3-bar-item w3-button tablink" onclick="openTab(event, 'Report Generate')">Report Generate</button>
-  <button class="w3-bar-item w3-button tablink" onclick="openTab(event, 'Logout')">Logout</button>
+  <a class="w3-bar-item w3-button" href="/buyer/searchFreelancer">Search Freelancer</a>
+  <a class="w3-bar-item w3-button" href="/buyer/report">Report Generate</a>
+  <a class="w3-bar-item w3-button" href="/logout">Logout</a>
 </div>
 
-<div style="margin-left:130px">
+<div style="margin-left:230px">
   
   <div id="Job List" class="w3-container tab" style="display:none">
+    <h1 style="text-align: center;">Job List</h1>
     <table border="1">
       <tr>
         <th>ID</th>
@@ -51,15 +56,10 @@
       <% } %>
     </table>
   </div>
-
-
-
-  <div id="Create New Job" class="w3-container tab" style="display:none">
-    <a href="/buyer/job/create">Create Job</a>
-  </div>
  
  
   <div id="Review" class="w3-container tab" style="display:none">
+    <h1 style="text-align: center;">Review List</h1>
     <table border="1">
       <tr>
         <th>ID</th>
@@ -83,12 +83,9 @@
       <% } %>
     </table>
   </div>
-
-  <div id="Create Review" class="w3-container tab" style="display:none">
-    <a href="/buyer/review/create">Create Review</a>
-  </div>
  
   <div id="Payment" class="w3-container tab" style="display:none">
+    <h1 style="text-align: center;">Payment List</h1>
     <table border="1">
       <tr>
         <th>ID</th>
@@ -114,6 +111,7 @@
  
  
   <div id="Billing" class="w3-container tab" style="display:none">
+    <h1 style="text-align: center;">Billing List</h1>
     <table border="1">
       <tr>
         <th>ID</th>
@@ -134,6 +132,7 @@
   </div>
  
   <div id="Finance" class="w3-container tab" style="display:none">
+    <h1 style="text-align: center;">Finance List</h1>
     <table border="1">
       <tr>
         <th>ID</th>
@@ -156,6 +155,7 @@
   </div>
  
   <div id="Company Plan" class="w3-container tab" style="display:none">
+    <h1 style="text-align: center;">Company Plan</h1>
     <table border="1">
       <tr>
         <th>ID</th>
@@ -176,6 +176,7 @@
   </div>
 
   <div id="Freelancer List" class="w3-container tab" style="display:none">
+    <h1 style="text-align: center;">Freelancer List</h1>
     <table border="1">
       <tr>
         <th>ID</th>
@@ -197,19 +198,6 @@
       </tr>
       <% } %>
     </table>
-  </div>
-
-
-  <div id="Search Freelancer" class="w3-container tab" style="display:none">
-    <a href="/buyer/searchFreelancer">Search for Freelancer Here</a>
-  </div>
-
-  <div id="Report Generate" class="w3-container tab" style="display:none">
-    <a href="/buyer/report">Report Generate</a>
-  </div>
-
-  <div id="Logout" class="w3-container tab" style="display:none">
-    <a href="/logout">Logout</a>
   </div>
 
 </div>
