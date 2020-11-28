@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.1
+-- version 5.0.4
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 26, 2020 at 01:25 PM
--- Server version: 10.4.11-MariaDB
--- PHP Version: 7.2.27
+-- Generation Time: Nov 28, 2020 at 07:47 AM
+-- Server version: 10.4.16-MariaDB
+-- PHP Version: 7.4.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -46,6 +45,26 @@ INSERT INTO `admins` (`id`, `fname`, `username`, `password`, `email`, `phone`, `
 (1, 'Md shanin', 'shanin', '123', 'shanin@gmail.com', '01869217629', 'uttara dhaka'),
 (10, 'sam bob', 'bob', '123', 'bob@gmail.com', '1781465445', 'dhanmondi'),
 (12, 'bob sam', 'as', '123', 'as@gmail.com', '01869217629', 'dhanmondi');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `billing`
+--
+
+CREATE TABLE `billing` (
+  `id` int(10) NOT NULL,
+  `fname` varchar(50) NOT NULL,
+  `amount` int(50) NOT NULL,
+  `tax` int(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `billing`
+--
+
+INSERT INTO `billing` (`id`, `fname`, `amount`, `tax`) VALUES
+(1, 'abir islam', 5000, 1000);
 
 -- --------------------------------------------------------
 
@@ -111,6 +130,43 @@ INSERT INTO `chat` (`id_chat`, `message`, `date`, `username`, `Admin_Username`, 
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `company_plan`
+--
+
+CREATE TABLE `company_plan` (
+  `id` int(10) NOT NULL,
+  `description` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `company_plan`
+--
+
+INSERT INTO `company_plan` (`id`, `description`) VALUES
+(1, 'Our company\'s main goal is to make an website where people can experience amazing UI/UX.');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `finance`
+--
+
+CREATE TABLE `finance` (
+  `id` int(10) NOT NULL,
+  `month` varchar(50) NOT NULL,
+  `amount` int(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `finance`
+--
+
+INSERT INTO `finance` (`id`, `month`, `amount`) VALUES
+(1, 'November', 5000);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `freelancer`
 --
 
@@ -157,6 +213,46 @@ CREATE TABLE `job_list` (
 INSERT INTO `job_list` (`id`, `buyer_uname`, `buyer_email`, `job_desc`, `job_date`, `salary`, `freelancer_uname`) VALUES
 (1, 'sumaiya', 'sumaiya@gmail.com', 'dotnet programmer needed with at least 1 year experience ', '2020-12-10', 50000, '');
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `payment`
+--
+
+CREATE TABLE `payment` (
+  `id` int(10) NOT NULL,
+  `fname` varchar(50) NOT NULL,
+  `amount` int(50) NOT NULL,
+  `date` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `payment`
+--
+
+INSERT INTO `payment` (`id`, `fname`, `amount`, `date`) VALUES
+(1, 'abir islam', 5000, '2020-11-28 12:41:25');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `review`
+--
+
+CREATE TABLE `review` (
+  `id` int(10) NOT NULL,
+  `fname` varchar(50) NOT NULL,
+  `review` varchar(200) NOT NULL,
+  `date` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `review`
+--
+
+INSERT INTO `review` (`id`, `fname`, `review`, `date`) VALUES
+(1, 'abir islam', 'Excellent!!!!!!', '2020-11-28 12:42:42');
+
 --
 -- Indexes for dumped tables
 --
@@ -167,6 +263,12 @@ INSERT INTO `job_list` (`id`, `buyer_uname`, `buyer_email`, `job_desc`, `job_dat
 ALTER TABLE `admins`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `username` (`username`);
+
+--
+-- Indexes for table `billing`
+--
+ALTER TABLE `billing`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `buyer`
@@ -182,6 +284,18 @@ ALTER TABLE `chat`
   ADD PRIMARY KEY (`id_chat`);
 
 --
+-- Indexes for table `company_plan`
+--
+ALTER TABLE `company_plan`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `finance`
+--
+ALTER TABLE `finance`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `freelancer`
 --
 ALTER TABLE `freelancer`
@@ -195,6 +309,18 @@ ALTER TABLE `job_list`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `payment`
+--
+ALTER TABLE `payment`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `review`
+--
+ALTER TABLE `review`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -203,6 +329,12 @@ ALTER TABLE `job_list`
 --
 ALTER TABLE `admins`
   MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+
+--
+-- AUTO_INCREMENT for table `billing`
+--
+ALTER TABLE `billing`
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `buyer`
@@ -217,6 +349,18 @@ ALTER TABLE `chat`
   MODIFY `id_chat` int(10) NOT NULL AUTO_INCREMENT COMMENT '1', AUTO_INCREMENT=41;
 
 --
+-- AUTO_INCREMENT for table `company_plan`
+--
+ALTER TABLE `company_plan`
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `finance`
+--
+ALTER TABLE `finance`
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT for table `freelancer`
 --
 ALTER TABLE `freelancer`
@@ -227,6 +371,18 @@ ALTER TABLE `freelancer`
 --
 ALTER TABLE `job_list`
   MODIFY `id` int(200) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `payment`
+--
+ALTER TABLE `payment`
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `review`
+--
+ALTER TABLE `review`
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
